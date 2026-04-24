@@ -10,6 +10,7 @@ import {
   ResponsiveContainer,
   AreaChart,
   Area,
+  LabelList,
 } from "recharts";
 import { format, parseISO } from "date-fns";
 import {
@@ -82,9 +83,12 @@ const AnalyticsView = () => {
         </span>
       </div>
 
-      <div className="h-48 w-full">
+      <div className="h-56 w-full">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data}>
+          <AreaChart
+            data={data}
+            margin={{ top: 20, right: 20, left: -20, bottom: 0 }}
+          >
             <defs>
               <linearGradient
                 id={`color${dataKey}`}
@@ -109,7 +113,12 @@ const AnalyticsView = () => {
               tick={{ fontSize: 9, fontWeight: 700, fill: "#94a3b8" }}
               dy={10}
             />
-            <YAxis hide />
+            <YAxis
+              axisLine={false}
+              tickLine={false}
+              tick={{ fontSize: 9, fontWeight: 700, fill: "#cbd5e1" }}
+              width={40}
+            />
             <Tooltip content={<CustomTooltip />} />
             <Area
               type="monotone"
@@ -118,7 +127,21 @@ const AnalyticsView = () => {
               strokeWidth={3}
               fillOpacity={1}
               fill={`url(#color${dataKey})`}
-            />
+              dot={{ r: 4, fill: "white", stroke: colorDark, strokeWidth: 2 }}
+              activeDot={{
+                r: 6,
+                fill: colorDark,
+                stroke: "white",
+                strokeWidth: 2,
+              }}
+            >
+              <LabelList
+                dataKey={dataKey}
+                position="top"
+                offset={10}
+                style={{ fontSize: "10px", fontWeight: "900", fill: colorDark }}
+              />
+            </Area>
           </AreaChart>
         </ResponsiveContainer>
       </div>
