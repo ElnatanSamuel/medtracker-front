@@ -17,4 +17,10 @@ export const DoseAPI = {
   toggleTake: (id) => api.patch(`/doses/${id}/take`),
 };
 
+export const VitalAPI = {
+  getAll: (start, end) => api.get(`/vitals?startDate=${start}&endDate=${end}`),
+  create: (data) => api.post("/vitals", data),
+  delete: (id) => api.delete(`/vitals/${id}`),
+};
+
 export default api;
